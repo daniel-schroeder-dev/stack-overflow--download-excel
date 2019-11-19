@@ -1,6 +1,8 @@
-const excelDownloadButton = document.getElementById('excelDownload');
+const downloadExcelLink = document.getElementById('downloadExcelLink');
 
-excelDownloadButton.addEventListener('click', async () => {
-  const response = await fetch('http://localhost:3000/excel', { method: 'POST' })
-  window.location = 'http://localhost:3000/excel';
-});
+(async () => {
+  const downloadExcelResponse = await fetch('/downloadExcel');
+  const downloadExcelBlob = await downloadExcelResponse.blob();
+  const downloadExcelObjectURL = URL.createObjectURL(downloadExcelBlob);
+  downloadExcelLink.href = downloadExcelObjectURL;
+})();

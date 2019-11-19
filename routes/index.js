@@ -1,16 +1,17 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const path = require('path');
+
+const router = express.Router();
 
 router.get('/', function(req, res, next) {
   res.render('index');
 });
 
-router.post('/excel', (req, res, next) => {
-  res.redirect('/excel');
-});
-
-router.get('/excel', (req, res, next) => {
-  res.download('./tmp/excel.xlsx');
+router.get('/downloadExcel', (req, res, next) => {
+  const excelFilePath = path.join(__dirname, '../tmp/excel.xlsx');
+  res.sendFile(excelFilePath, (err) => {
+    if (err) console.log(err);
+  });
 });
 
 module.exports = router;
